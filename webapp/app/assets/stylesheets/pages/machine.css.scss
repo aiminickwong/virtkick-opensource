@@ -1,0 +1,79 @@
+@import 'machine/*';
+
+.btn-state {
+  margin-top: -3px;
+  margin-left: 20px;
+  padding: 5px 10px;
+  font-size: 11px;
+  border: 1px solid $border-pink-muted-color !important;
+
+  .state {
+    padding: 3px;
+    &.fa-play {
+      color: $running-color;
+    }
+    &.fa-pause {
+      color: $paused-color;
+    }
+    &.fa-restart {
+      color: $restart-color;
+    }
+    &.fa-stop {
+      color: $stopped-color;
+    }
+  }
+}
+
+#page-machine {
+  .nav {
+    background-color: $grouping-bg;
+    li {
+      background-color: $grouping-bg;
+
+      a {
+        color: $navbar-default-color;
+      }
+
+      a:hover {
+        color: $navbar-default-link-active-color;
+      }
+
+      &.active {
+        a {
+          color: white;
+          border-radius: 0px;
+        }
+      }
+    }
+
+    @media(min-width: $screen-md-min) {
+      border: 1px solid $cream-color;
+      border-radius: 4px;
+
+      li {
+        a {
+          border-radius: 0px;
+        }
+
+        &.active:first-child {
+          a {
+            border-top-left-radius: 3px !important;
+            border-bottom-left-radius: 3px !important;
+          }
+        }
+
+        &.active:last-child {
+          a {
+            border-top-right-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    margin-top: 25px;
+    text-align: left;
+  }
+}

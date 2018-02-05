@@ -1,0 +1,25 @@
+- id: 10
+  code: ubuntu
+  name: Ubuntu
+- id: 20
+  code: debian
+  name: Debian
+- id: 30
+  code: centos
+  name: CentOS
+- id: 40
+  code: fedora
+  name: Fedora
+- id: 50
+  code: opensuse
+  name: openSUSE
+- id: 60
+  code: coreos
+  name: CoreOS
+- id: 70
+  code: arch-linux
+  name: Arch Linux
+- id: 80
+  code: freebsd
+  name: FreeBSD
+

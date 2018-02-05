@@ -1,0 +1,64 @@
+#page-scheduler.text-center
+  p Schedule machine lifecycle events like start, stop or restart with a cron-like syntax.
+
+  .create
+    a.btn.btn-default.btn-block
+      | Create a new event
+
+  table.table.table-striped.text-left
+    thead
+      tr
+        th.action Action
+        th.cron Cron rule
+        th.next Next on
+        th.then Then on
+        th.actions
+    tbody
+      - for schedule in [['play', 'start', '0 12 * * *', '2014-06-28 12:00', '2014-06-29 12:00'],
+          ['stop', 'stop', '30 12 * * *', '2014-06-28 12:30', '2014-06-29 12:30']]
+        tr
+          td.action
+            i class="fa fa-#{schedule[0]}" &nbsp;
+            = schedule[1]
+          td.cron = schedule[2]
+          td.next = schedule[3]
+          td.then = schedule[4]
+          td.actions
+            a.btn.btn-default Edit
+            a.btn.btn-danger Delete
+      tr.new
+        td.action
+          select.fa.form-control
+            option &#xf04b; start
+            option &#xf04d; stop
+            option &#xf01e; restart
+            option &#xf04c; pause
+        td.cron
+          select.combobox
+            option
+            option every day at midnight
+            option every week on Sunday midnight
+            option on the 1st day of month
+            option on the last day of month
+        td.next
+        td.then
+        td.actions
+          a.btn.btn-default Save
+
+
+- content_for :scripts do
+  javascript:
+    $(function() {
+      $('tr.new').hide();
+      //$('#page-scheduler .combobox').combobox();
+
+      $('#page-scheduler .create').click(function() {
+        $('.new').show();
+        $('.combobox').focus();
+
+        $('.combobox').keydown(function() {
+          $('.new .next').text('2014-07-03 13:37');
+          $('.new .then').text('2014-07-08 13:37');
+        })
+      });
+    });

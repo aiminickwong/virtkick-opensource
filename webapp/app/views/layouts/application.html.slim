@@ -1,0 +1,90 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
+    title
+      = @title || 'Alpha: VirtKick, 1-Click Cloud Management'
+    meta name='description' content='A prototype of VirtKick, a user-oriented cloud management center.'
+    meta name='viewport' content='width=device-width'
+    link rel='shortcut icon' href='/favicon.ico'
+    = stylesheet_link_tag 'application', media: 'all'
+    = requirejs_include_tag 'application'
+    = csrf_meta_tags
+  body
+    .mobile-newsletter.hidden-md.hidden-lg
+      .container
+        = render partial: 'layouts/newsletter'
+
+    .container.main
+      .row.header
+        .menu.col-md-3.hidden-xs.hidden-sm
+          = link_to machines_path do
+            = image_tag 'logo/virtkick-logo-pixelart-64.png'
+
+        .header.col-md-6
+          - if @header
+            h1
+              - if @icon
+                span class="oi oi-#{@icon}"
+              = @header
+          - else
+            = yield :header
+
+        .action.col-md-3
+          = yield :action
+
+      .row
+        .col-md-3.side-menu-wrapper
+          nav.navbar.navbar-default.side-menu role="navigation"
+            .navbar-header.hidden-md.hidden-lg
+              button.navbar-toggle data-target="#navbar-collapsable" data-toggle="collapse" type="button"
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              a.navbar-brand href='/'
+                = image_tag 'logo/virtkick-logo-pixelart-48.png', class: 'pix'
+                |  virt
+                span.kick kick
+            #navbar-collapsable.collapse.navbar-collapse
+              ul.nav.navbar-nav
+                - if user_signed_in?
+                  = navbar_item machines_path do
+                    span.oi.oi-monitor
+                    | Machines
+                - else
+                  = navbar_item new_user_session_path do
+                    span.fa.fa-sign-in
+                    | Sign in
+                = navbar_item 'https://www.virtkick.io', class: 'home' do
+                  span.fa.fa-rocket
+                  | VirtKick.io
+          .dropdown
+            button.btn.btn-primary
+              span.caret
+              
+          .desktop-newsletter.hidden-xs.hidden-sm.text-center
+            = render partial: 'layouts/newsletter'
+
+
+        .col-md-9
+          - if notice
+            .alert.alert-info = notice
+          - if alert
+            .alert.alert-warning = alert
+
+          = yield
+
+
+    = javascript_include_tag 'application'
+    = render partial: 'layouts/doorbell'
+    = yield :scripts
+
+    /[if lte IE 8]
+      #old-browser
+        javascript:
+          document.getElementById('page').style.display = 'none';
+        div
+          | You are using an outdated browser.<br/>
+            Please <a href="http://browsehappy.com/">upgrade your browser</a> to access this website.

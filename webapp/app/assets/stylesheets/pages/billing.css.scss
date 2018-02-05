@@ -1,0 +1,66 @@
+#page-billing {
+  div.billing {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 0;
+    background-color: $light;
+    border-radius: 4px;
+    text-align: center;
+    width: 180px;
+    height: 140px;
+    margin-bottom: 20px;
+
+    .bigger {
+      display: inline-block;
+      margin-top: 5px;
+      font-size: 150%;
+    }
+
+    p.button {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    &.balance {
+      margin-top: 0;
+      width: 220px;
+      height: 140px + 2 * 20px;
+      margin-bottom: 0;
+      font-size: 125%;
+
+      .bigger {
+        margin-top: 10px;
+        font-size: 175%;
+      }
+
+      p.button {
+        margin-top: 15px;
+        a {
+          font-size: 100%;
+        }
+      }
+    }
+  }
+
+  .invoices {
+    margin-top: 50px;
+  }
+
+  table {
+    td {
+      vertical-align: middle;
+    }
+
+    .date {
+      width: 60%;
+    }
+
+    .actions {
+      width: 0;
+    }
+  }
+
+  .fa-check {
+    color: #20A11A;
+  }
+}

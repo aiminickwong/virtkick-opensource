@@ -1,0 +1,42 @@
+#!/bin/bash
+set -e
+cd $(dirname $0)
+
+. setup/system.sh
+
+which virsh > /dev/null # should fail and exit script in case of missing
+
+export LIBVIRT_VERSION=$(virsh --version)
+
+if ! [ -e webapp/README.md ] || ! [ -e backend/README.md ];then
+  echo "Pulling backend and webapp submodules"
+  git submodule update --init --recursive
+fi
+
+export ISO_DIR="$(readlink -f ~virtkick)/iso"
+export HDD_DIR="$(readlink -f ~virtkick)/hdd"
+
+. setup/ruby.sh
+
+. setup/node.sh
+
+if ! [ -e node_modules/.done ];then
+  rm -rf node_modules
+fi
+
+if ! [ -e node_modules ];then
+  npm install
+  touch node_modules/.done
+fi
+
+which pip > /dev/null || (echo "Command \"pip\" not found, please install python-pip or equivalent\"" && exit 1)
+
+#. setup/python.sh
+
+node starter.js $*
+
+# Remember error
+rc=$?
+if [[ $rc != 0 ]] ; then
+    exit $rc
+fi

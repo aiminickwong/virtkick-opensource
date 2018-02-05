@@ -1,0 +1,12 @@
+- flashes = defined?(section) ? flash[section] : flash
+
+- if flashes
+  - flashes.each do |type, message|
+    div class="alert #{bootstrap_alert_class_for_flash(type)} fade in"
+      button.close data-dismiss="alert" ×
+      - if message.is_a? Array
+        - for msg in message
+          = msg
+          br
+      - else
+        = message

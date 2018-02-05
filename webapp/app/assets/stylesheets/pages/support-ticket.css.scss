@@ -1,0 +1,46 @@
+#page-support-ticket {
+  h2 {
+    margin-top: 0;
+  }
+
+  h2 span {
+    font-size: 60%;
+    padding-left: 10px;
+  }
+
+  .conversation {
+    div {
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 15px;
+
+      & + div {
+        border-top: solid 1px $table-border-color;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      &.support {
+        background-color: $table-border-color;
+      }
+
+      .question {
+        span {
+          display: inline-block;
+          float: left;
+          margin-top: 5px;
+          margin-right: 10px;
+          font-size: 120%;
+        }
+      }
+
+      p.submit {
+        margin-top: 15px;
+      }
+    }
+  }
+}

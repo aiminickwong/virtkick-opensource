@@ -1,0 +1,50 @@
+#page-addons-zerigo {
+  .row {
+    margin-top: 40px;
+  }
+
+  ul.plans {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li.active {
+      background-color: $medium-dark;
+      color: $bg;
+    }
+
+    li {
+      padding: 10px;
+      list-style-type: none;
+
+      span.price {
+        float: right;
+      }
+    }
+
+    li:hover {
+      cursor: pointer;
+      background-color: $light;
+      color: $text-color;
+    }
+  }
+
+  dt {
+    font-weight: normal;
+    float: left;
+    clear: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  dd {
+    float: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  input.signup {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

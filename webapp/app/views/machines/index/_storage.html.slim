@@ -1,0 +1,58 @@
+#page-storage.text-center
+
+  = render partial: '/flash', locals: {section: 'storage'}
+
+  = form_for @disk, remote: true, url: machine_disks_path(@machine) do |f|
+    .create.text-right
+      a.btn.btn-primary.create-button
+        | Create a new disk
+      div.new
+        div.name
+          = @machine.disks.next_device_name
+        div.type
+          = collection_select :disk, :type, @disk_types, :id, :name, {}, class: 'type form-control'
+        div.size
+          = collection_select :disk, :size_plan, Defaults::DiskSizePlan.all, :id, :name, {}, class: 'size form-control'
+          | GB
+        = f.submit 'Create', class: 'btn btn-primary save-button'
+
+  /TODO: snapshot all images (the only revertable way for snapshots in libvirt)
+
+  table.table.table-striped.text-left
+    thead
+      tr
+        th.name Disk name
+        th.actions
+        th.type Type
+        th.size Size
+    tbody
+      - @machine.disks.each do |disk|
+        / TODO: Handle case when disk was detached and deleted, but virtio wasn't present in VM (e.g. boot loader screen).
+        / Such a disk should be grayed out. The tooltip should say "This disk will disappear after you stop your VM".
+        tr
+          td.name
+            = disk.device
+            i.fa.fa-spinner.fa-spin.hidden
+            i.fa.fa-check.hidden
+            i.fa.error.fa-warning.hidden
+            span.error.message
+          td.actions
+            div.buttons
+              / TODO: resize. (virStorageVol.resize)
+              = link_to machine_disk_path(@machine, disk), method: 'delete', remote: true, class: 'btn delete-disk',
+                    data: {confirm: 'Are you sure? This cannot be undone.', confirm_title: "Delete #{disk.device}"} do
+                span.oi.oi-delete
+                span.action Delete
+          td.type = disk.type
+          td.size = number_to_human_size disk.size
+      tr.example.hidden
+        td.name
+          span.name
+          i.fa.fa-spinner.fa-spin
+          i.fa.fa-check.hidden
+          i.fa.error.fa-warning.hidden
+          span.error.message
+        td.actions
+          div.buttons
+        td.type
+        td.size

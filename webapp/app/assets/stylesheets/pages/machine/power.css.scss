@@ -1,0 +1,135 @@
+#page-machine #power {
+  .btn { 
+    padding: 10px 35px;
+    &.dropdown-toggle {
+      padding: 10px 15px;
+    }
+  }
+  .stats {
+    margin: 0;
+    border: solid 1px $table-border-color;
+    border-radius: 4px;
+    color: $navbar-default-color;
+
+    padding: 30px 20px;
+
+    .key {
+      min-height: 40px;
+    }
+
+    .val {
+      background-color: $grouping-bg;
+      border-radius: 4px;
+      padding: 8px 0px;
+      text-align: center;
+
+      &.bigger {
+        padding: 17px 0px;
+      }
+
+      &.power-state {
+        background-color: $grouping-bg;
+
+        i {
+          margin-right: 7px;
+          &.fa-play {
+            color: $running-color;
+          }
+          &.fa-pause {
+            color: $paused-color;
+          }
+          &.fa-repeat {
+            color: $restart-color;
+          }
+          &.fa-stop {
+            color: $stopped-color;
+          }
+        }
+      }
+    }
+
+    .progress {
+      margin-top: 8px;
+      height: 10px;
+      margin-bottom: 0;
+    }
+  }
+
+  .alert {
+    margin-top: 20px;
+  }
+
+  .controls {
+    margin-top: 40px;
+    text-align: center;
+
+    .btn-group {
+      .icon {
+        margin-right: 8px;
+      }
+
+      a.btn {
+        width: 140px;
+        @include transition(color, 0.25s, ease-in, 0s);
+
+        &:hover {
+          @include transition(color, 0.25s, ease-in, 0s);
+        }
+      }
+      a.disabled {
+        opacity: 0.4;
+      }
+      a.action.start {
+        &.active {
+          color: white;
+          background-color: $running-color;
+          i {
+            color: white;
+          }
+        }
+      }
+      a.action.pause {
+        &.active {
+          color: white;
+          background-color: $paused-color;
+          i {
+            color: white;
+          }
+        }
+      }
+      a.action.resume {
+        padding-left: 15px;
+        padding-right: 15px;
+        &.active {
+          color: white;
+          background-color: $paused-color;
+          i {
+            color: white;
+          }
+        }
+      }
+      a.action.restart {
+        &.active {
+          color: white;
+          background-color: $restart-color;
+          i {
+            color: white;
+          }
+        }
+      }
+      a.action.stop {
+        &.active {
+          color: white;
+          background-color: $stopped-color;
+          i {
+            color: white;
+          }
+        }
+      }
+      .dropdown-toggle {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+}

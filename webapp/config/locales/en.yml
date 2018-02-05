@@ -1,0 +1,10 @@
+en:
+  activemodel:
+    errors:
+      models:
+        forms/new_machine:
+          attributes:
+            hostname:
+              blank: 'Please enter the hostname. Example format: myapp.company.com.'
+            plan_id:
+              blank: 'Please pick a plan.'

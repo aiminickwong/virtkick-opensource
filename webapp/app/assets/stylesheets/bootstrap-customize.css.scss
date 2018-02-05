@@ -1,0 +1,292 @@
+@import 'colors';
+@import 'mixins';
+
+$bg: #ffffff;
+$dark: #5D2749;
+$medium-dark: #EC4863;
+$medium: #EC4863;
+$medium-light: #FF733E;
+
+$highlight-bg: #F4F2E9;
+$grouping-bg: #F4F2E9;
+$grouping-active: #F7F0F1;
+$grouping-color: #9E8697;
+$light: $grouping-bg;
+
+// Bootstrap overrides, lookup the names at http://getbootstrap.com/customize/
+$text-color: #554F57;
+$brand-primary: $medium-dark;
+$brand-secondary: #8F6E84;
+
+$body-bg: $bg;
+$grid-columns: 12;
+$grid-float-breakpoint: 992px;
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
+$font-size-base: 18px;
+$font-size-h1: 32px;
+$font-size-h2: 26px;
+$font-size-h3: $font-size-base;
+
+$input-border-focus: $medium-dark;
+$table-border-color: $border-pink-color;
+
+$brand-info: $grouping-bg;
+$btn-info-color: $text-color;
+$btn-default-bg: $grouping-bg;
+$btn-default-color: $brand-secondary;
+
+$navbar-margin-top: 0;
+$navbar-default-border: #A73E5C;
+$navbar-default-bg: $grouping-bg;
+$navbar-default-color: $grouping-color;
+
+$navbar-default-link-color: $navbar-default-color;
+$navbar-default-link-active-bg: $navbar-default-bg;
+$navbar-default-link-active-color: $brand-primary;
+$navbar-default-link-hover-bg: $light;
+$navbar-default-link-hover-color: $medium-dark;
+
+$navbar-padding-vertical: 7px;
+$navbar-height: 68px;
+
+$nav-link-hover-bg: $light;
+$nav-tabs-active-link-hover-color: $brand-primary;
+$nav-tabs-border-color: $medium-dark;
+$nav-tabs-active-link-hover-border-color: $nav-tabs-border-color;
+
+$progress-bg: $highlight-bg;
+
+$screen-xs:                  480px !default;
+$screen-xs-min:              $screen-xs !default;
+$screen-phone:               $screen-xs-min !default;
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+$screen-tablet:              $screen-sm-min !default;
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+$screen-desktop:             $screen-md-min !default;
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+$screen-lg-desktop:          $screen-lg-min !default;
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+
+.progress {
+  .progress-bar {
+  	@include box-shadow(none);
+  }
+  @include box-shadow(none !important);
+  border-radius: 3px !important;
+}
+
+label {
+  font-weight: normal !important;
+}
+
+.btn {
+  @include box-shadow(none !important);
+  @include transition(background-color, 0.15s, ease-in, 0);
+  
+  &:hover, &.active {
+    @include transition(background-color, 0.15s, ease-in, 0);
+  }
+  
+  .default {
+  	color: $bright-violet-color;
+  	background-color: $cream-color;
+  }
+
+  &.btn-primary {
+    border: 1px solid $red-color !important; 
+    &:hover {
+      border: darken($red-color, 10%);
+    }
+  }
+
+  &.btn-default {
+    border: 1px solid $cream-color !important; 
+  }
+}
+
+.navbar-default {
+	.navbar-toggle, .navbar-toggle:hover, .navbar-toggle:focus {
+		border: 1px solid $cream-color !important;
+		background-color: transparent !important;
+  	@include transition(background-color, 0.25s, ease-in, 0);
+	  .icon-bar {
+      background-color: $red-color !important;
+    }
+    &:hover {
+      background-color: $red-color !important;
+      @include transition(background-color, 0.25s, ease-in, 0);
+      .icon-bar {
+        background-color: white !important;
+      }
+    }
+  }
+}
+
+input, .form-control input, select, .form-control select, .input-group input {
+  @include box-shadow(none !important);
+  border-color: $border-pink-color !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+
+  &:focus, &:active {
+    border-color: $red-color !important;
+  }
+
+  &:focus, &:active {
+    @include box-shadow(0 0 8px rgba(236,72,99,0.6) !important);
+  }  
+}
+
+.input-group {
+  input {
+    padding: 6px 12px !important;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    &:focus {
+      outline-color: transparent;
+    }
+  }
+
+  .input-group-addon.dropdown-toggle {
+    background-color: $red-color !important;
+    border-color: $red-color !important;
+    cursor: pointer;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+table.table {
+  margin: 0 auto;
+  border: 1px solid $border-pink-color;
+  border-radius: 4px;
+  border-collapse: initial;
+  font-size: 0.9em !important;
+
+  .btn {
+    font-size: 1em !important;
+  }
+
+  .expand {
+    cursor: pointer;
+    color: white;
+    font-size: 0.5em;
+    border-radius: 2px;
+    padding: 4px;
+    background-color: $red-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+
+  thead tr th {
+    border: 0px;
+    border-radius: 4px;
+
+    &:first-child {
+      padding-left: 20px;
+    }
+    &:last-child {
+      padding-right: 20px;
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        color: $bright-violet-color;
+        border: 0px;
+        background-color: transparent !important;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        &:first-child {
+          padding-left: 20px;
+        }
+        &:last-child {
+          padding-right: 20px;
+        }
+      }    
+      td, th {
+        border-radius: 4px;
+        vertical-align: middle;
+
+        &.actions {      
+          text-align: right;
+          vertical-align: middle;
+          font-size: 0.9em;
+
+          .buttons {
+            opacity: 0;
+
+            a.btn {
+              margin: 0px;
+              padding: 6px;
+              color: $muted-violet-color;
+              @include transition(color, 0.1s, ease-in, 0);
+              display: inline-block;
+
+              &:hover, &:focus, &:active {
+                color: darken($muted-violet-color, 10%);
+                @include transition(opacity, 0.1s, ease-in, 0);
+              }
+
+              span.action {
+                margin-left: 5px;
+              }
+            }
+            @media(max-width: $screen-sm-max) {
+              span.oi, span.fa {
+                margin-right: 15px;
+                font-size: 18px !important;
+              }
+              span.action {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    tr:hover {
+      td.actions .buttons {
+        opacity: 1;
+        @include transition(opacity, 0.2s, ease-in, 0);
+      }
+    }
+  }
+
+  &.table-striped {
+    tbody {
+      tr:nth-child(odd) {
+        td, th {
+          background-color: $muted-cream-color !important;
+        }
+      } 
+    }
+  }
+}
+
+.dropdown-menu {
+  padding: 0px !important;
+  border: 1px solid $border-pink-color !important;
+}
+
+.container.main {
+  padding-bottom: 10px;
+}
+
+$icon-font-path: '/font/';
+
+@import 'bootstrap/_variables';

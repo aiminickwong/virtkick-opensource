@@ -1,0 +1,72 @@
+#page-power
+  .row.stats
+    .col-sm-3
+      .key Memory:
+      .val.bigger = number_to_human_size(@machine.memory.megabytes)
+    .col-sm-3
+      .key Processors:
+      - if @machine.status.stopped?
+        .val.bigger
+          = @machine.processors
+          |  CPU
+      - else
+        .val
+          = @machine.processors
+          |  CPU
+        .progress
+          .progress-bar role='progressbar' style="width: #{@machine.processor_usage}%; min-width: 1%"
+            span.sr-only
+              = @machine.processor_usage
+              | % usage
+    .col-sm-3
+      .key Storage:
+      .val = number_to_human_size(@machine.disks.size)
+      .progress
+        .progress-bar role='progressbar' style="width: #{@machine.disks.usage}%; min-width: 1%"
+          span.sr-only
+            = number_to_human_size @machine.disks.used
+            |  used (
+            = @machine.disks.usage
+            | %)
+    .col-sm-3
+      .key State:
+      .val.power-state.bigger data-running="#{@machine.status.running?}"
+        span
+          i class="icon #{@machine.status.icon}"
+          span.status = @machine.status.name
+
+  = render partial: '/flash', locals: {section: 'power'}
+
+  .controls
+    .btn-group
+      = power_action start_machine_path(@machine), 'start' do
+        i.icon.fa.fa-play
+        span.status Start
+      = power_action pause_machine_path(@machine), 'pause only-on' do
+        i.icon.fa.fa-pause
+        span.status Pause
+      = power_action resume_machine_path(@machine), 'resume only-on' do
+        i.icon.fa.fa-forward
+        span.status Resume
+      = power_action stop_machine_path(@machine), 'stop only-on' do
+        i.icon.fa.fa-stop
+        span.status Stop
+      .btn-group
+        button.only-on.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown'
+          i.fa.fa-caret-down
+        ul.dropdown-menu
+          li
+            = power_action force_stop_machine_path(@machine), 'force-stop only-on', false do
+              span.fa.fa-power-off
+              span.status Hard stop
+      = power_action restart_machine_path(@machine), 'restart only-on' do
+        i.icon.fa.fa-repeat
+        span.status Restart
+      .btn-group
+        button.only-on.btn.btn-default.dropdown-toggle type='button' data-toggle='dropdown'
+          i.fa.fa-caret-down
+        ul.dropdown-menu
+          li
+            = power_action force_restart_machine_path(@machine), 'force-restart only-on', false do
+              span.icon.fa.fa-power-off
+              span.status Hard reset

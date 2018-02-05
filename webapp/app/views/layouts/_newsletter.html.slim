@@ -1,0 +1,22 @@
+.newsletter.text-center
+  .description
+    p
+      | This is the hosted alpha of VirtKick,
+      br.hidden-xs
+      | a free & open source alternative to OpenStack and SolusVM.
+
+    p
+      | Check out the #{link_to 'static prototype', 'https://demo.virtkick.io/'}
+      |  to get familiar with all planned features.
+
+
+    h3 Sign up for standalone beta!
+
+  form.form-inline action='https://virtkick.us8.list-manage.com/subscribe/post?u=b74a227fdbddc9f590a62114e&amp;id=08823d8a7b' method='post' role='form'
+
+    .input-group
+      input.newsletter-email.form-control.input name='EMAIL' placeholder='e-mail address' type='text'
+      span.input-group-btn
+        input.btn.btn-primary name='subscribe' type='submit' value='go!'
+
+  p.result data-success='Thanks! Please check your e-mail.'

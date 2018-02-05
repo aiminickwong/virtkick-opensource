@@ -1,0 +1,70 @@
+- id: 10
+  iso_distro_id: 10
+  file: ubuntu-14.04.1-server-amd64.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 14.04.1
+  long_name: Ubuntu 14.04.1 LTS
+- id: 11
+  iso_distro_id: 10
+  file: ubuntu-13.10-server-amd64.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 13.10
+  long_name: Ubuntu 13.10
+- id: 20
+  iso_distro_id: 20
+  file: debian-7.6.0-amd64-DVD-1.iso
+  pool_name: ISO
+  bit: 64
+  short_name: wheezy
+  long_name: Debian wheezy
+- id: 21
+  iso_distro_id: 20
+  file: debian-testing-amd64-DVD-1.iso
+  pool_name: ISO
+  bit: 64
+  short_name: jessie
+  long_name: Debian jessie
+- id: 30
+  iso_distro_id: 30
+  file: CentOS-7.0-1406-x86_64-DVD.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 7.0
+  long_name: CentOS 7.0
+- id: 40
+  iso_distro_id: 40
+  file: Fedora-Live-Desktop-x86_64-20-1.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 20
+  long_name: Fedora 20
+- id: 50
+  iso_distro_id: 50
+  file: openSUSE-13.1-DVD-x86_64.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 13.1
+  long_name: openSUSE 13.1
+- id: 60
+  iso_distro_id: 60
+  file: coreos_production_iso_image.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 431.0.0
+  long_name: CoreOS Alpha 431.0.0
+- id: 70
+  iso_distro_id: 70
+  file: archlinux-2014.09.03-dual.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 2014.09.03
+  long_name: Arch Linux 2014.09.03
+- id: 80
+  iso_distro_id: 80
+  file: FreeBSD-10.0-RELEASE-amd64-dvd1.iso
+  pool_name: ISO
+  bit: 64
+  short_name: 10.0
+  long_name: FreeBSD 10.0

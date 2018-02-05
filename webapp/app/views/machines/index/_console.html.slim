@@ -1,0 +1,149 @@
+#page-console.text-center
+  .console-window-wrapper
+    .console-window
+      .canvas-wrapper
+        canvas data-password=@machine.vnc_password data-uuid=@machine.uuid
+      .vm-actions
+        .iso
+          = form_for @machine, as: :machine, url: mount_iso_machine_path(@machine), method: :post, remote: true do |f|
+            = f.collection_select :iso_image_id, @iso_images, :id, :long_name, {prompt: true},
+                  class: 'distributions iso_dropdown', id: 'console_machine_iso_image_id'
+            i.fa.fa-spinner.fa-spin.hidden
+            i.fa.fa-check.hidden
+            i.fa.fa-warning.hidden
+        .rocket-menu
+          = image_tag 'logo/virtkick-logo-pixelart-gray-24.png'
+        .restart
+          a.btn.btn-default.ctrlaltdel
+            | Reboot
+          = link_to force_restart_machine_path(@machine), method: :post, remote: true, class: 'btn btn-default hardreset',
+              data: {confirm: 'Are you sure? This may cause data loss.', confirm_title: "Hard reset #{@machine.hostname}"}
+            | Hard reset
+      p.bright-violet.browser-info
+        | If the VNC console doesn't appear, please upgrade your browser or try a different one.
+      p.bright-violet.status.hidden
+        | Machine killed. Now starting it again... &nbsp;
+        i.fa.fa-spinner.fa-spin
+
+
+
+- content_for :scripts do
+  javascript:
+    require(['jquery', 'novnc', '!domReady'], function($, RFB) {
+      var rfb;
+      var hardResetRequested = false;
+      var connectLoop = false;
+      var $canvasWrapper = $('#page-console').find('.canvas-wrapper');
+
+      function updateConsole() {
+        var width, height;
+        if (!rfb) {
+          width = 640;
+          height = 480;
+        } else {
+          width = rfb.get_display().get_width();
+          height = rfb.get_display().get_height();
+        }
+
+        // after connecting first noVNC frames are not real screens, so catch only
+        // realistic sizes to avoid console flickering
+        if (height <= 20) {
+          return;
+        }
+
+        $canvasWrapper.width(width + "px");
+        $canvasWrapper.height(height + "px");
+
+        var margin = 70;
+        var left = ($('#page-machine').width() - width - margin) / 2;
+        left -= $('.side-menu-wrapper').outerWidth() / 2;
+
+        $('.console-window').css("margin-left", left);
+      }
+
+      $('.console').click(function() {
+        var connect = function() {
+          if (!connectLoop) {
+            return;
+          }
+
+          var $canvas = $('#page-console').find('canvas');
+          var host = window.location.hostname;
+          var port = 6080;
+          var password = $canvas.attr('data-password');
+          var uuid = $canvas.attr('data-uuid');
+          document.cookie = 'token=1-' + uuid + '; path=/';
+          rfb.connect(host, port, password, '');
+        };
+
+        rfb = new RFB({
+          'target': $('canvas')[0],
+          'repeaterID': '',
+          'encrypt': location.protocol === 'https:',
+          'true_color': true,
+          'local_cursor': true,
+          'shared': true,
+          'onUpdateState': function(rfb, state, oldstate, statusMsg) {
+            if (state === 'normal') {
+              $('#page-console .browser-info').hide();
+              $('#page-console .status').addClass('hidden');
+              hardResetRequested = false;
+            } else if (state === 'failed') {
+              if (hardResetRequested) {
+                $('#page-console .browser-info').hide();
+                $('#page-console .status').removeClass('hidden');
+              } else {
+                $('#page-console .browser-info').show();
+                $('#page-console .status').addClass('hidden');
+              }
+              setTimeout(connect, 1000);
+            }
+            return;
+          },
+          'onFBUComplete': function (rfb, fbu) {
+            updateConsole();
+          },
+          'view_only': false,
+          'onPasswordRequired': function() {
+            console.log('VNC: Password required');
+          }
+        });
+
+        $('.side-menu-wrapper').addClass('collapsed');
+
+        connectLoop = true;
+        connect();
+      });
+
+      $('#page-console .ctrlaltdel').click(function() {
+        rfb.sendCtrlAltDel();
+      });
+
+      $('#page-console .hardreset').click(function() {
+        hardResetRequested = true;
+      });
+
+      $('.nav a:not(.console)').click(function() {
+        if (rfb) {
+          rfb.disconnect();
+        }
+        connectLoop = false;
+      });
+
+      $('#page-machine .nav li').click(function (e) {
+        if ($(e.currentTarget).find('.console').length == 0) {
+          $('.side-menu-wrapper').removeClass('collapsed');
+          $('.side-menu').removeClass('expanded');
+        }
+      });
+
+      $('.side-menu-wrapper .dropdown').click(function () {
+        $('.side-menu').toggleClass('expanded');
+      });
+
+      $(window).resize(function () {
+        updateConsole();
+      });
+
+      updateConsole();
+    });

@@ -1,0 +1,96 @@
+#page-machine #storage {
+  text-align: left;
+
+  .create {
+    margin-bottom: 20px;
+
+    .btn {
+      padding: 15px 35px;
+      width: 210px;
+
+      &.save-button {
+        margin-left: 10px;
+      }
+    }
+
+    .new {
+      text-align: right;
+      display: none;
+
+      .name, .type, .size {
+        display: inline-block;
+        margin-right: 20px; 
+        
+        &.name {
+          input {
+            display: inline-block;
+            width: 75%;
+          }
+        }
+
+        &.type {
+          select {
+            display: inline-block;
+            &.size {
+              width: 60px;
+            }
+          }
+        }
+
+        &.size {
+          margin-right: 5px; 
+          select {
+            display: inline-block;
+            &.size {
+              width: 90px;
+            }
+          }
+        }
+      }
+    }    
+  }
+
+  table {
+    tbody tr {
+      height: 60px;
+    }
+
+    @mixin nowrap {
+      width: 1px !important;
+      white-space: nowrap;
+    }
+
+    .name {
+      @include nowrap;
+
+      i {
+        margin-left: 7px;
+      }
+
+      i.fa-warning {
+        margin-left: 15px;
+        margin-right: 7px;
+      }
+
+      .message {
+        font-size: 13px;
+      }
+    }
+
+    .actions {
+      width: 100%;
+      text-align: right;
+    }
+
+    .type {
+      text-align: right;
+      @include nowrap;
+    }
+
+    .size {
+      margin-right: 8px;
+      text-align: right;
+      @include nowrap;
+    }
+  }
+}

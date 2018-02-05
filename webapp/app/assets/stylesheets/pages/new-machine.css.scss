@@ -1,0 +1,139 @@
+#page-new-machine {
+  $active-border-px: 5px;
+
+  .form-group {
+    margin-bottom: 50px;
+  }
+
+  .btn-group {
+    .btn {
+      $padding: 10px;
+
+      padding-top: $padding;
+      padding-bottom: $padding;
+      &.fixed-width {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      margin: 0 20px;
+      @include grouping;
+
+      input[type='radio'], input[type='checkbox'] {
+        position: absolute;
+        z-index: -1;
+        @include opacity(0);
+      }
+
+      &.btn-info.active, &.btn-info:hover {
+        box-shadow: none !important;
+        background-color: $grouping-active;
+        border-color: $table-border-color;
+        border-bottom: solid $active-border-px $brand-primary;
+        padding-bottom: $padding - $active-border-px;
+      }
+
+      span.title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      span.val {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .details {
+    text-align: center;
+    input {
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  .plans.btn-group {
+    .btn {
+      width: 120px;
+    }
+  }
+
+  .image-types.btn-group {
+    margin-bottom: 50px;
+  }
+
+  .appliances.btn-group, .isos.btn-group {
+    .btn {
+      margin: 0 7px;
+      margin-bottom: 16px;
+      width: 84px;
+      height: 100px;
+      padding: 0;
+
+      .wrap {
+        height: 68px;
+
+        img {
+          margin: 12px;
+          margin-bottom: 8px;
+          max-width: 50px;
+          max-height: 50px;
+        }
+      }
+
+
+      span {
+        display: inline-block;
+        font-size: 16px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+
+  .snapshots.btn-group {
+    display: block;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+    table {
+      margin: 0 auto;
+      background-color: $grouping-bg;
+
+      .name {
+        width: 60%;
+      }
+      .storage, .date {
+        text-align: right;
+      }
+
+      tr {
+        border-left: solid $active-border-px $grouping-bg;
+        border-right: solid $active-border-px $grouping-bg;
+      }
+
+      tbody {
+        tr:hover {
+          border-left: solid $active-border-px $brand-primary;
+
+          td {
+            cursor: pointer;
+            background-color: $grouping-active;
+          }
+        }
+
+        tr.selected {
+          border-left: solid $active-border-px $brand-primary;
+
+          td {
+            background-color: $grouping-active;
+          }
+        }
+      }
+    }
+  }
+
+  .create {
+    margin-top: 30px;
+  }
+}

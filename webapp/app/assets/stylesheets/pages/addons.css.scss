@@ -1,0 +1,39 @@
+#page-addons {
+  h3:first-child {
+    margin-top: 0;
+  }
+
+  .addons {
+    img {
+      height: 30px;
+    }
+
+    .fraud img {
+      $margin: 10px;
+      margin-top: $margin / 2;
+      margin-bottom: $margin / 2;
+      height: 30px - $margin !important;
+    }
+
+    div {
+      padding-top: 15px;
+
+      .signup {
+        visibility: hidden;
+      }
+    }
+
+    div:hover {
+      cursor: pointer;
+      background-color: $light;
+
+      .signup {
+        visibility: visible;
+      }
+    }
+
+    .signup {
+      margin-left: 15px;
+    }
+  }
+}

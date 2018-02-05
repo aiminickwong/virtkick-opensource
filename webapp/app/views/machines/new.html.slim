@@ -1,0 +1,88 @@
+- @header = 'Create a New Machine'
+- @icon = 'monitor'
+
+#page-new-machine
+  = form_for @machine, as: :machine, url: machines_path(@machine), method: :post do |f|
+    = render partial: '/flash', locals: {section: 'new_machine'}
+
+    .form-group.details
+      - attrs = {placeholder: 'Machine Hostname', class: 'form-control'}
+      - attrs[:autofocus] = true if @machine.hostname.nil? or errors_for?(@machine, :hostname)
+      = f.text_field :hostname, attrs
+      = errors_for @machine, :hostname
+
+    .form-group
+      h2
+        i.oi.oi-cart
+        | Choose a plan
+      .form-group.text-center
+        .plans.btn-group data-toggle='buttons'
+          - for plan in @plans
+            - active = @machine.plan == plan ? 'active' : ''
+            = f.label :plan_id, class: "btn btn-info plan #{active} fixed-width" do
+              = f.radio_button :plan_id, plan.id
+              span.title
+                = number_to_human_size(plan.memory.gigabytes)
+                |  RAM
+              br
+              span.val
+                = number_to_human_size(plan.storage)
+                |  SSD
+              br
+              span.val
+                = plan.cpu
+                |  CPU
+
+    .form-group.image
+      h2
+        i.oi.oi-aperture
+        | Pick an image
+      .form-group.text-center
+        .image-types.btn-group data-toggle='buttons'
+          - for type in [['Mount ISO', 'isos'], ['Appliance', 'appliances'], ['1-Click App', 'apps']]
+            - name = type[0]
+            - id = type[1]
+            - active = @machine.image_type == id ? 'active' : ''
+            = f.label :image_type, class: "btn btn-info image-type #{active}" do
+              = f.radio_button :image_type, id, class: id
+              span.title = name
+
+        .image-type-group.appliances.btn-group data-toggle="buttons"
+          p VirtKick will deliver appliances with various Linux distributions. Coming soon!
+
+        - active = @machine.iso_distro ? 'active' : ''
+        div class="image-type-group isos btn-group #{active}" data-toggle="buttons"
+          - for iso in @isos
+            - active = @machine.iso_distro == iso ? 'active' : ''
+            = f.label :iso_distro_id, class: "btn btn-info distro #{active}" do
+              - image = 'distros/' + iso.code + '.png'
+              .wrap
+                = image_tag image, alt: iso.name
+              = f.radio_button :iso_distro_id, iso.id
+              span.name = iso.name
+
+        .image-type-group.apps.btn-group data-toggle="buttons"
+          p VirtKick will deliver a 1-click integration with Sandstorm.
+          p It allows you to install many webapps with a single click. Coming soon!
+
+        .form-group.text-center
+          = f.submit 'Create a Machine', class: 'create btn btn-primary btn-lg'
+
+
+- content_for :scripts do
+    javascript:
+      require(['jquery', '!domReady'], function($) {
+        $('.image-type-group:not(.active)').hide();
+
+        $('.image-type').click(function() {
+          $('.image-type-group').hide();
+          var selected = $(this).find('input').attr('class');
+          $('.image-type-group.' + selected).show();
+
+          $('.create.btn').attr('disabled', selected !== 'isos');
+        });
+
+        $('.create').closest('form').submit(function () {
+          $('.create').val('Loading...').attr('disabled', 'disabled');
+        });
+      });

@@ -1,0 +1,21 @@
+#page-support {
+  table {
+    td {
+      vertical-align: middle;
+
+      span {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 80%;
+      }
+    }
+
+    .id {
+      width: 70px;
+    }
+
+    .date {
+      text-align: right;
+    }
+  }
+}

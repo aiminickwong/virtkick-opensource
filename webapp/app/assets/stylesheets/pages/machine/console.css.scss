@@ -1,0 +1,93 @@
+#page-machine {
+  .console-window-wrapper {
+    position: absolute;
+    box-sizing: border-box;
+    
+    .console-window {
+      position: absolute;
+      box-sizing: border-box;
+      padding: 35px 35px 15px 35px;
+      margin-bottom: 50px;
+      border-radius: 4px;
+      background-color: $cream-color;
+      @include transition(margin-left, 0.5s, ease-in, 0s);
+
+      .canvas-wrapper {
+        box-sizing: border-box;
+        background-color: black;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0;
+        
+        canvas {
+          margin-bottom: 0;
+        }
+      }
+
+      .vm-actions {
+        width: 100%;
+        padding-top: 13px;
+        text-align: center;
+        position: relative;
+
+        .iso {
+          float: left;
+          width: auto;
+
+          .distributions {
+            background-color: transparent;
+            color: $bright-violet-color;
+            padding: 8px 30px;
+            margin-right: 10px;
+            border:  1px solid $muted-violet-color !important;
+            border-radius: 4px;
+            cursor: pointer;
+            @include transition(background-color, 0.2s, ease-in, 0s);
+
+            &:focus, &:hover {
+              background-color: darken($cream-color, 10%);
+              @include transition(background-color, 0.2s, ease-in, 0s);
+            }
+          }
+        }
+
+        .rocket-menu {
+          position: absolute;
+          top: 20px;
+          left: 50%;
+          margin-left: -12px;
+        }
+
+        .restart {
+          float: right;
+
+          .ctrlaltdel, .hardreset{
+            margin-left: 20px;
+            padding: 8px 30px;
+            color: $bright-violet-color;
+            border:  1px solid $muted-violet-color !important;
+            text-align: left;
+            margin-top: 0px;
+            i {
+              margin-right: 10px;
+            }
+            &:active {
+              background-color: darken($cream-color, 23%);
+            }
+          }
+        }
+      }
+
+      p.browser-info, p.status {
+        position: relative;
+        top: -320px;
+        width: 100%;
+        padding-left: 150px;
+        padding-right: 150px;
+        float: left;
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+  }
+}

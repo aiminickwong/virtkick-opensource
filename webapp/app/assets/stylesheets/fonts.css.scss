@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(font_path('source-sans-pro.woff')) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(font_path('source-sans-pro-bold.woff')) format('woff');
+}
+
+@font-face {
+  font-family: 'Earthbound';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Earthbound'), local('Earthbound-Regular'), url(font_path('earthbound.woff')) format('woff');
+}
+
+@font-face {
+  font-family: 'Icons';
+  src: url(font_path('open-iconic.eot'));
+  src: url(font_path('open-iconic.eot?#iconic-sm')) format('embedded-opentype'), url(font_path('open-iconic.woff')) format('woff'), url(font_path('open-iconic.ttf')) format('truetype'), url(font_path('open-iconic.svg#iconic-sm')) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import 'font-awesome';

@@ -1,0 +1,84 @@
+- @header = 'Machines'
+- @icon = 'monitor'
+
+- content_for :action do
+  - if user_signed_in?
+    = link_to 'Create a new machine', new_machine_path, class: 'btn btn-primary btn-block'
+
+#page-index
+  .items
+    ul
+      li
+        p
+          i.oi.oi-monitor
+          | Machines
+        p.value = @machines.count
+      li
+        p
+          i.oi.oi-puzzle-piece
+          | Memory
+        p.value = number_to_human_size_with_unit @machines.sum(&:memory).megabytes, min_unit: 'MB'
+      li
+        p
+          i.fa.fa-database
+          | Storage
+        p.value = number_to_human_size_with_unit @machines.deep_sum(:disks, :size), min_unit: 'GB'
+      li
+        p
+          i.oi.oi-credit-card
+          | Monthly
+        p.value free
+
+  - if @machines.count + @new_machines.count > 0
+    table.table.table-striped
+      thead
+        tr
+          th.name Name
+          th.memory Memory
+          th.storage Storage
+      tbody
+        - @new_machines.each do |new_machine|
+          - next if new_machine.finished? and new_machine.error_message.nil?
+          tr
+            - if new_machine.error_message
+              - style = {class: 'failed', icon: 'fa-warning'}
+            - else
+              - style = {class: 'creating', icon: 'fa-spinner fa-spin'}
+
+            td.name class=style[:class] data-url=machine_progress_path(new_machine)
+              i class="fa #{style[:icon]}"
+              = new_machine.hostname
+              span.error = new_machine.error_message
+            td.memory  = number_to_human_size(new_machine.plan.memory.gigabytes)
+            td.storage = number_to_human_size(new_machine.plan.storage)
+        - @machines.each do |machine|
+          tr
+            td.name class=(machine.status.running? ? 'on' : 'off')
+              i class=machine.status.icon
+              a href=machine_path(machine) = machine.hostname
+            td.memory = number_to_human_size(machine.memory.megabytes)
+            td.storage = number_to_human_size(machine.disks.sum &:size)
+  - else
+    p You don't have a machine yet. Kick things off and #{link_to 'create one!', new_machine_path}
+
+- content_for :scripts do
+  javascript:
+    require(['jquery', '!domReady'], function($) {
+      var $creating = $('.creating');
+      if ($creating.length > 0) {
+        var url = $creating.attr('data-url');
+        setInterval(function() {
+          $.ajax(url).success(function(data) {
+            if (!data.finished) {
+              return;
+            }
+
+            if (data.error_message) {
+              window.location.reload(false);
+            } else {
+              window.location.pathname = '/machines/' + data.given_meta_machine_id;
+            }
+          });
+        }, 500);
+      }
+    });

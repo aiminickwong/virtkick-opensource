@@ -1,0 +1,58 @@
+domain type='kvm'
+  name = machine.hostname
+  uuid = machine.uuid
+  / TODO: auto-generate, then fetch the value
+  memory unit='bytes' = machine.memory.gigabytes.to_i
+  currentMemory unit='bytes' = machine.memory.gigabytes.to_i
+  vcpu placement='static' = machine.processors
+  os
+    type arch='x86_64' machine='pc-i440fx-2.1' hvm
+    boot dev='hd'
+    boot dev='cdrom'
+    bootmenu enable='yes'
+  features
+    acpi
+    apic
+    pae
+  cpu mode='host-model'
+    model fallback='allow'
+  clock offset='utc'
+  on_poweroff destroy
+  on_reboot restart
+  on_crash restart
+  devices
+    disk device='cdrom' type='file'
+      driver name='qemu' type='raw'
+      source file=machine.iso_image.path
+      target bus='ide' dev='hda'
+      readonly
+      address bus='1' controller='0' target='0' type='drive' unit='1'
+    controller index='0' type='usb'
+      address bus='0x00' domain='0x0000' function='0x2' slot='0x01' type='pci'
+    controller index='0' model='pci-root' type='pci'
+    controller index='0' type='ide'
+      address bus='0x00' domain='0x0000' function='0x1' slot='0x01' type='pci'
+    interface type='network'
+      - network = machine.networks.public
+      source network = network.pool_name
+      model type='virtio'
+      filterref filter='clean-traffic'
+        - if network.dhcp?
+          - for ip in network.dhcp_pool
+            parameter name='IP' value=ip
+        - elsif network.ip4
+          parameter name='IP' value=network.ip4
+      address bus='0x00' domain='0x0000' function='0x0' slot='0x03' type='pci'
+    serial type='pty'
+      target port='0'
+    console type='pty'
+      target port='0' type='serial'
+    input bus='usb' type='tablet'
+    input bus='ps2' type='mouse'
+    input bus='ps2' type='keyboard'
+    graphics type='vnc' listen=machine.vnc_listen_ip autoport='yes' passwd=machine.vnc_password
+    video
+      model heads='1' type='cirrus' vram='9216'
+      address bus='0x00' domain='0x0000' function='0x0' slot='0x02' type='pci'
+    memballoon model='virtio'
+      address bus='0x00' domain='0x0000' function='0x0' slot='0x05' type='pci'

@@ -1,0 +1,39 @@
+#page-images {
+  p {
+    margin-bottom: 10px;
+  }
+
+  .repos {
+    margin-top: 5px;
+
+    label {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  table {
+    margin-top: 20px;
+
+    th {
+      white-space: nowrap;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    .upvotes {
+      text-align: right;
+    }
+
+    .appliance .distro img {
+      height: 30px;
+    }
+
+    .create {
+      width: 165px;
+    }
+  }
+
+}

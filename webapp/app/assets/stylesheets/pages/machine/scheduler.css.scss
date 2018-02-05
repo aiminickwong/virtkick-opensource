@@ -1,0 +1,74 @@
+#page-machine #scheduler {
+  text-align: left;
+
+  p {
+    text-align: center;
+  }
+
+  .create {
+    margin-bottom: 20px;
+
+    .btn {
+      padding: 15px 35px;
+
+      &.save-button {
+        margin-left: 10px;
+      }
+    }
+
+    .new {
+      text-align: right;
+      vertical-align: middle;
+      display: none;
+      
+      .action, .cron, .next, .then {
+        display: inline-block;
+        margin-right: 20px; 
+        
+        &.action {
+          select {
+            display: inline-block;
+          }
+        }
+
+        &.cron {
+          vertical-align: middle;
+          display: inline-block;
+          margin-bottom: -3px;
+
+          .combobox-container {
+            display: inline-block;
+            width: 200px;
+            .input-group {
+              input {
+                width: 170px !important;
+              }
+            }
+          }
+        }
+
+        &.next, &.then {
+          visibility: hidden;
+          &.visible {
+            visibility: visible;
+          }
+        }
+      }
+    }    
+
+  }
+
+  table {
+    th.action {
+      width: 15%;
+    }
+
+    th.cron {
+      width: 25%;
+    }
+
+    th.actions {
+      width: 25%;
+    }
+  }
+}

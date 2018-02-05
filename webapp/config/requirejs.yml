@@ -1,0 +1,16 @@
+shim: 
+  jquery:
+    exports: 'jQuery'
+  jquery_ujs: ['jquery']
+  'bootstrap': ['jquery', 'jquery_ujs']
+  'twitter/bootstrap/rails/confirm':
+    deps: ['bootstrap', 'jquery_ujs']
+  'novnc/rfb':
+    deps: ["novnc/util","novnc/webutil", "novnc/base64", "novnc/websock", "novnc/des",
+        "novnc/keysymdef", "novnc/keyboard", "novnc/input", "novnc/display", "novnc/jsunzip"]
+  'novnc':
+    deps: ['novnc/rfb']
+    exports: 'RFB'
+modules:
+  - name: 'application'
+wrapShim: true

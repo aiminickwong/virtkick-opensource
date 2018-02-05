@@ -1,0 +1,72 @@
+#page-home {
+  .header {
+    width: 320px;
+    height: 120px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+
+    img {
+      float: left;
+      margin-right: 25px;
+    }
+
+    .logo {
+      font-family: 'Earthbound';
+      font-size: 48px;
+      display: inline-block;
+
+      .virt {
+        color: $dark;
+      }
+      .kick {
+        color: $brand-primary;
+      }
+    }
+
+    .beta {
+      position: relative;
+      top: -10px;
+      font-size: 27px;
+    }
+  }
+
+  .start-demo {
+    width: 50%;
+    min-width: 350px;
+    height: 130px;
+    margin-top: 30px;
+    font-weight: lighter;
+    margin-bottom: 30px;
+
+    .title {
+      font-size: 48px;
+    }
+
+    .disclaimer {
+      font-size: 18px;
+    }
+  }
+
+  .features {
+    margin-top: 50px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      line-height: 200%;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .newsletter {
+    margin-top: 50px;
+  }
+}

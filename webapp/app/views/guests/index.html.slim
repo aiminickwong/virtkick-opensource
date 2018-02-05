@@ -1,0 +1,58 @@
+#page-home
+  .container
+    .row
+      .md-col-12
+        .header
+          = image_tag 'logo/virtkick-logo-pixelart-114.png'
+          .logo
+            span.virt virt
+            span.kick kick
+          .beta
+            | Hosted Alpha
+
+      .md-col-12.text-center
+        p VirtKick is a simple, open source orchestrator.
+
+
+    .text-center
+      .row
+        .md-col-12
+          = button_to guests_path, method: :post, class: 'btn btn-primary btn-lg start-demo', rel: 'nofollow noindex' do
+            .title Test it out now!
+            .disclaimer Alpha sessions are limited to 30 minutes.
+      .row
+        .md-col-12
+          p
+            | Manage your virtual machines easily.
+            br
+            | No technology background required!
+
+          p.features
+            | Planned features are:
+            ul
+              li
+                i.fa.fa-lg.fa-linux
+                | KVM, OpenVZ, Xen, Bhyve and Docker containers
+              li
+                i.fa.fa-lg.fa-search
+                | search Docker Registry Hub for available images
+              li
+                i.fa.fa-lg.fa-money
+                | usable for providers (payments, invoices, helpdesk)
+              li
+                i.fa.fa-lg.fa-external-link
+                a href='https://demo.virtkick.io' see the static prototype to get familar with others
+
+      .row
+        .md-col-12.newsletter.text-center
+          h3 Sign up for standalone beta!
+
+          form.form-inline action='https://virtkick.us8.list-manage.com/subscribe/post?u=b74a227fdbddc9f590a62114e&amp;id=08823d8a7b' method='post' role='form'
+
+            .input-group
+              input.newsletter-email.form-control.input name='EMAIL' placeholder='e-mail address' type='text'
+              span.input-group-btn
+                input.btn.btn-primary name='subscribe' type='submit' value='go!'
+
+          p.result data-success='Thanks! Please check your e-mail.'
+

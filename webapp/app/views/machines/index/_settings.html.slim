@@ -1,0 +1,16 @@
+#page-settings
+  h3 CD image
+
+  = form_for @machine, as: :machine, url: mount_iso_machine_path(@machine), method: :post, remote: true do |f|
+    label
+      | Mount ISO: &nbsp;
+      = f.collection_select :iso_image_id, @iso_images, :id, :long_name, {prompt: true}, class: 'iso_dropdown'
+      i.fa.fa-spinner.fa-spin.hidden
+      i.fa.fa-check.hidden
+      i.fa.fa-warning.hidden
+
+  h3 Danger Zone
+
+  p
+    = link_to 'Delete machine', machine_path(@machine), method: 'delete', class: 'btn btn-danger',
+          data: {confirm: 'Are you sure? This cannot be undone.', confirm_title: "Delete #{@machine.hostname}"}
